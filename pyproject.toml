@@ -1,0 +1,17 @@
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+exclude = [  # Исключаем старые задания, чтобы на них не применялись новые правила
+    "src/conditions/*.py",
+    "src/cycles/*.py",
+    "src/function/*.py",
+    "src/massive/*.py",
+    "src/range/even_uneven.py",
+    "src/range/tiri_piri.py",
+]
+
+[tool.ruff.lint]
+select = ["B", "COM", "N", "E", "ISC", "W", "F", "RET", "SIM", "PL"]
+
+[tool.ruff.format]
+quote-style = "single"
