@@ -26,12 +26,12 @@ import sys
 
 
 class Clothes:
-    def __init__(self, temperature: int, clothes: list[str | int]) -> None:
+    def __init__(self, temperature: int) -> None:
         self.temperature = temperature
-        self.clothes = clothes
+        self.clothes = Clothes.get_clothes('data', os.listdir('data'))
 
     @staticmethod
-    def get_clothes(path, items) -> list[str | int]:
+    def get_clothes(path: str, items: list[str]) -> list[str | int]:
         clothes_array = []
         for item in items:
             with open(f'{path}/{item}', 'r', encoding='utf-8') as f:
@@ -40,8 +40,8 @@ class Clothes:
                 clothes_array.append(lines)
         return clothes_array
 
-    def print_clothes(self) -> None:
-        suitable_clothes = [items for items in self.clothes if self.temperature in range(items[2][0], items[2][1])]
+    def print_suitable_clothes(self) -> None:
+        suitable_clothes = [items for items in self.clothes if items[2][0] <= self.temperature < items[2][1]]
         if suitable_clothes:
             print('Предлагаем сегодня надеть:')
             for item in suitable_clothes:
@@ -65,13 +65,12 @@ class EditClothes:
 
 
 def suggest_clothes() -> None:
-    clothes_array = Clothes.get_clothes('data', os.listdir('data'))
     entered_temperature = int(input('Какая у вас сейчас температура?\n'))
-    clothes = Clothes(entered_temperature, clothes_array)
-    clothes.print_clothes()
+    clothes = Clothes(entered_temperature)
+    clothes.print_suitable_clothes()
 
 
-def edit_clothes() -> None:
+def add_clothes() -> None:
     clothing_name = input('Введите название одежды:\n')
     clothing_type = input('Введите тип одежды:\n')
     start_temperature = input('Введите начальный диапазон температуры:\n')
@@ -92,7 +91,7 @@ def show_menu() -> None:
 def main() -> None:
     actions = {
         '1': suggest_clothes,
-        '2': edit_clothes,
+        '2': add_clothes,
         '0': sys.exit,
     }
     while True:

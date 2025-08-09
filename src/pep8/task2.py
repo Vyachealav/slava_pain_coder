@@ -5,7 +5,7 @@
 
 def max_digit(number: int) -> int:
     number_array = list(str(number))
-    return max(list(map(int, number_array)))
+    return max(map(int, number_array))
 
 
 number = int(input('Введите число:\n'))
