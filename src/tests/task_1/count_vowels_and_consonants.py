@@ -1,7 +1,6 @@
 def is_russian_word(word):
     """Проверяет, что слово состоит только из русских букв"""
-    russian_letters = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-    return all(letter in russian_letters for letter in word.lower())
+    return all('а' <= letter <= 'я' for letter in word.lower())
 
 
 def count_vowels(word):
@@ -15,7 +14,7 @@ def count_vowels(word):
         elif letter in exceptions:
             result_exceptions += 1
 
-    return [result_vowel, result_exceptions]
+    return (result_vowel, result_exceptions)
 
 
 def count_vowels_and_consonants(word):
