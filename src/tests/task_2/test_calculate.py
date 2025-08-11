@@ -34,4 +34,3 @@ class TestCalculator:
     def test_divide_by_zero(self):
         with pytest.raises(ZeroDivisionError):
             calculator(10, 0, '/')
-
