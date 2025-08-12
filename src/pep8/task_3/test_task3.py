@@ -1,9 +1,10 @@
-#Напишите тесты для программ “Как одеться сегодня по погоде”.
+# Напишите тесты для программ “Как одеться сегодня по погоде”.
 # Соответственно чтобы её протестить, нужно создать тестовый файл, и проверить,
 # что с него корректно раскладывается по списку данные
 import os
 import shutil
 from task3 import Clothes
+
 
 class TestClothes:
     def test_get_clothes(self):
@@ -17,4 +18,3 @@ class TestClothes:
             f.write('(-20, -5)')
         items = os.listdir(current_directory)
         assert Clothes.get_clothes(current_directory, items) == [['Толстовка', 'Верхняя одежда', [-20, -5]]]
-
