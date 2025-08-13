@@ -17,6 +17,11 @@ select = ["B", "COM", "N", "E", "ISC", "W", "F", "RET", "SIM", "PL"]
 quote-style = "single"
 
 [tool.mypy]
+exclude = [
+    "tests/.*",
+    "task_2/.*",
+    "task_3/.*",
+]
 # Start off with these
 warn_unused_configs = true
 
