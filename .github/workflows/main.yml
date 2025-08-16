@@ -24,3 +24,7 @@ jobs:
       run: |
         ruff format --check --diff
         ruff check
+    - name: Run mypy
+      run: |
+        pip install mypy
+        mypy .
