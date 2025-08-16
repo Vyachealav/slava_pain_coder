@@ -3,13 +3,7 @@
 # 2. Распишите тесты для этой функции
 import pytest
 from calculator import calculator
-
-
-class TestCalculator:
-    @pytest.mark.parametrize(
-        'a, b, sign, excepted_result',
-        [
-            (1, 2, '+', 3),
+TEST_CALCULATOR_PARAM = [ (1, 2, '+', 3),
             (-7, 7, '+', 0),
             (0, 0, '+', 0),
             (5.25, 0.75, '+', 6),
@@ -26,7 +20,12 @@ class TestCalculator:
             (-9, 3, '*', -27),
             (2.5, 2, '*', 5),
             (2.5, 0, '*', 0),
-        ],
+ ]
+
+class TestCalculator:
+    @pytest.mark.parametrize(
+        'a, b, sign, excepted_result',
+        TEST_CALCULATOR_PARAM,
     )
     def test_calculator(self, a, b, sign, excepted_result):
         assert calculator(a, b, sign) == excepted_result
