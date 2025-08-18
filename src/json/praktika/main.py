@@ -18,7 +18,7 @@ import inspect
 import json
 import secrets
 import actions_with_json
-from typing import Self
+import typing
 
 DIR = os.path.dirname(os.path.abspath(__file__))
 JSON_PATH = f'{DIR}/data/data.json'
@@ -26,11 +26,11 @@ JSON_USERS_PATH = f'{DIR}/data/users.json'
 
 
 class Question:
-    def __init__(self, question_hash: dict[str | int]) -> None:
-        self.text = question_hash['text']
-        self.answer = question_hash['answer']
-        self.variants = question_hash['variants']
-        self.points = int(question_hash['points'])
+    def __init__(self, question_hash: dict[str, typing.Any]) -> None:
+        self.text: str = question_hash['text']
+        self.answer: str = question_hash['answer']
+        self.variants: list[str] = question_hash['variants']
+        self.points: int = int(question_hash['points'])
         self.question_hash = question_hash
 
     def __str__(self) -> str:
@@ -41,7 +41,7 @@ class Question:
         return inspect.cleandoc(result)
 
     @staticmethod
-    def questions() -> list:
+    def questions() -> list['Question']:
         """Получаем все вопросы из json файла"""
 
         data = actions_with_json.read_json_data_file()
@@ -63,14 +63,14 @@ class Question:
 
 
 class Quiz:
-    def __init__(self, questions: list) -> None:
+    def __init__(self, questions: list['Question']) -> None:
         self.questions = questions
         self.total_points = 0
 
-    def is_true_answer(self, question: Self, user_answer_index: int) -> bool:
+    def is_true_answer(self, question: 'Question', user_answer_index: int) -> bool:
         return user_answer_index == question.variants.index(question.answer)
 
-    def add_points(self, question: Self) -> None:
+    def add_points(self, question: 'Question') -> None:
         self.total_points += question.points
 
 
@@ -83,7 +83,7 @@ class Authorization:
         users = actions_with_json.read_json_users_file()
         return any(self.username == user.get('username') and self.password == user.get('password') for user in users)
 
-    def add_points_total(self, question: Self) -> None:
+    def add_points_total(self, question: 'Question') -> None:
         users = actions_with_json.read_json_users_file()
 
         for user in users:
