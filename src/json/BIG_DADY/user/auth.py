@@ -11,6 +11,7 @@ def hash_password(password: str) -> str:
 
 class UnknownUserError(Exception):
     """Ошибка, возникающая при попытке авторизации неизвестного пользователя."""
+
     pass
 
 
