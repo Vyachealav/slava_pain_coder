@@ -21,6 +21,7 @@ exclude = [
     "tests/.*",
     "task_2/.*",
     "task_3/.*",
+    "BIG_DADY/.*"
 ]
 # Start off with these
 warn_unused_configs = true
